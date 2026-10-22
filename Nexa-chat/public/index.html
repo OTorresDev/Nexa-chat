@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Chat de IA con JavaScript, Node.js, pnpm y los modelos de ApiNex."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Nexa Chat · ApiNex</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">✦</div>
+          <div>
+            <div class="brand-name">Nexa Chat</div>
+            <div class="brand-subtitle">Tu asistente de IA</div>
+          </div>
+        </div>
+
+        <button class="new-chat-button" id="new-chat-button" type="button">
+          <span aria-hidden="true">＋</span>
+          Nueva conversación
+        </button>
+
+        <div class="sidebar-note">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Modelo seleccionado</strong>
+            <p id="sidebar-model-name">DeepSeek V4.1 Flash 1017</p>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <span class="footer-symbol" aria-hidden="true">⌘</span>
+          <span>Demo local · ApiNex</span>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div class="mobile-brand">
+            <div class="brand-mark" aria-hidden="true">✦</div>
+            <strong>Nexa Chat</strong>
+          </div>
+
+          <div class="topbar-title">
+            <span class="topbar-status"></span>
+            <span>Chat con IA</span>
+          </div>
+
+          <button
+            class="clear-button"
+            id="clear-button"
+            type="button"
+            title="Limpiar conversación"
+          >
+            Limpiar
+          </button>
+        </header>
+
+        <section class="chat-area" aria-label="Conversación">
+          <div class="welcome" id="welcome">
+            <div class="welcome-icon" aria-hidden="true">✦</div>
+
+            <p class="eyebrow">TU ASISTENTE CON IA</p>
+
+            <h1>
+              ¿Qué vamos a crear
+              <br />
+              <span>hoy?</span>
+            </h1>
+
+            <p class="welcome-copy">
+              Pregunta, aprende y crea con DeepSeek V4.1 Flash 1017.
+            </p>
+
+            <div class="suggestions">
+              <button
+                class="suggestion"
+                type="button"
+                data-prompt="Explícame qué es JavaScript con un ejemplo sencillo."
+              >
+                <span class="suggestion-icon" aria-hidden="true">⌘</span>
+                <span class="suggestion-content">
+                  <strong>Aprender programación</strong>
+                  <small>Explícame JavaScript</small>
+                </span>
+                <span class="suggestion-arrow" aria-hidden="true">↗</span>
+              </button>
+
+              <button
+                class="suggestion"
+                type="button"
+                data-prompt="Crea una función en JavaScript que detecte si un número es par o impar y explícame el código."
+              >
+                <span class="suggestion-icon" aria-hidden="true">⟨/⟩</span>
+                <span class="suggestion-content">
+                  <strong>Escribir código</strong>
+                  <small>Crear una función</small>
+                </span>
+                <span class="suggestion-arrow" aria-hidden="true">↗</span>
+              </button>
+
+              <button
+                class="suggestion"
+                type="button"
+                data-prompt="Dame tres ideas de proyectos sencillos para practicar Node.js."
+              >
+                <span class="suggestion-icon" aria-hidden="true">✧</span>
+                <span class="suggestion-content">
+                  <strong>Ideas para proyectos</strong>
+                  <small>Practicar con Node.js</small>
+                </span>
+                <span class="suggestion-arrow" aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="messages"
+            id="messages"
+            aria-live="polite"
+            aria-relevant="additions"
+          ></div>
+        </section>
+
+        <section class="composer-wrap">
+          <form class="composer" id="chat-form">
+            <textarea
+              id="message-input"
+              rows="1"
+              maxlength="12000"
+              placeholder="Escribe tu mensaje..."
+              aria-label="Escribe tu mensaje"
+              required
+            ></textarea>
+
+            <div class="composer-bottom">
+              <div class="composer-tools">
+                <span class="model-select-icon" aria-hidden="true">✦</span>
+
+                <select id="model-select" aria-label="Seleccionar modelo de IA">
+                  <option value="free/deepseek-v4.1-flash">
+                    DeepSeek V4.1 Flash 1017
+                  </option>
+                  <option value="free/muse-spark-1.3">Muse Spark 1.3</option>
+                  <option value="free/glm-5.3-flash">GLM-5.3 Flash</option>
+                  <option value="free/minimax-m3.1-flash">
+                    MiniMax M3.1 Flash
+                  </option>
+                  <option value="free/glm-5.3">GLM 5.3</option>
+                  <option value="free/gemini-3.8-flash">
+                    Gemini 3.8 Flash
+                  </option>
+                  <option value="free/deepseek-v4-pro-0813">
+                    DeepSeek V4 Pro
+                  </option>
+                  <option value="free/gpt-6-luna">GPT 6 Luna</option>
+                  <option value="free/glm-5.3-flashx">GLM 5.3 FlashX</option>
+                  <option value="free/mimo-v2.6-pro">MiMo V2.6 Pro</option>
+                  <option value="free/jev-1.13">Jev 1.13</option>
+                </select>
+              </div>
+
+              <button
+                class="send-button"
+                id="send-button"
+                type="submit"
+                aria-label="Enviar mensaje"
+              >
+                <span>Enviar</span>
+                <span aria-hidden="true">↑</span>
+              </button>
+            </div>
+          </form>
+
+          <p class="disclaimer">
+            La IA puede cometer errores. No compartas datos personales ni claves
+            secretas.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script src="/script.js" defer></script>
+  </body>
+</html>
