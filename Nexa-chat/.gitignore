@@ -1,0 +1,12 @@
+
+# Dependencias instaladas del proyecto
+node_modules/
+
+# Archivo con las variables de entorno y la clave API privada
+.env
+
+# Permitir que la plantilla de configuración se suba al repositorio
+!.env.example
+
+# Archivos del sistema macOS
+.DS_Store
